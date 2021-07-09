@@ -1,7 +1,11 @@
+#activation du module de réécriture de l'url
 RewriteEngine On 
 
+#deux conditions préparant la ligne suivante
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+#règle de réécriture de l'url
 
 RewriteRule ^(.*)$ index.php?demande=$1
 

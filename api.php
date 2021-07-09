@@ -12,6 +12,7 @@ function getFactureById($id){
     $stmt->execute();
     $facture = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
+    
     sendJSON($facture);  // envoyer les données recupérées de la base de données en format json
 }
 
@@ -37,6 +38,11 @@ function sendJSON($infos){
     header("Access-Control-Allow-Origin: *");  // * donne l'acces à tout le monde 
     header("Content-Type: application/json");
     echo json_encode($infos,JSON_UNESCAPED_UNICODE); // le 2eme parametre pour eviter les probs d'accent et d'orthographe ...
+    
+    
 }
 
+// $json = json_encode($infos,JSON_UNESCAPED_UNICODE); // le 2eme parametre pour eviter les probs d'accent et d'orthographe ...
+// $informations = json_decode($json,true);
 
+?>

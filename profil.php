@@ -13,11 +13,9 @@ require 'util.php';
 if(isset($_POST['btn']))
     if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password']))
         {
-            /*echo '<pre>' ;
-            print_r($_POST);
-            echo '</pre>';*/
+          
 
-            $email = $_POST['email'];  
+$email = $_POST['email'];  
 $password = $_POST['password'];
 
 $pdo = new PDO("mysql:host=localhost;dbname=laradeel", "root", "");
@@ -34,11 +32,16 @@ $stmt->execute();
 if($stmt->rowCount() > 0)
 {
   $data = $stmt->fetchAll();
-  if( $password == $data[0]["password"] ) // pour le hashage utuliser password_verify au lieu de == 
+  if( $password == $data[0]["password"] ) // pour le hashage utiliser password_verify au lieu de == 
   {
-    echo 'Bonjour ' . $email . ' !' . '<br>' ;
-    echo 'Bienvenue dans votre compte chez LARADEEL <br><br>' ;
-        /// recuperer l'id concernant les contrats d'eau d'un tel client connecté
+    echo '  <img src="index.jpg" alt=""> ';
+    $nom = $data[0]["nom"];
+    $prenom = $data[0]["prenom"];
+//     echo '<button type="button" class="btn btn-primary btn-lg active" style="background-color: red;">
+// Revenir à la page précédante </button><br><br> ' ;
+    echo '<h2>' . 'Bonjour ' . $nom . ' ' . $prenom . ' !' . '</h2>'  ;
+    echo '<h3>' . 'Bienvenue dans votre compte chez LARADEEL <br><br>' . '</h3>' ;
+        /// recuperer l'id concernant les contrats d'eau d'un tel client connecté  ///
 
     $ideau = "SELECT abonne_id FROM dossier_abonne where email = '$email' and gerance = 'eau'";
 
@@ -47,7 +50,8 @@ if($stmt->rowCount() > 0)
     $datae = $stmt->fetchAll();
     $ide = $datae[0]["abonne_id"];
 
-       /// recuperer l'id concernant les contrats d'electricité d'un tel client connecté
+       /// recuperer l'id concernant les contrats d'electricité d'un tel client connecté  ///
+
     $idbt = "SELECT abonne_id FROM dossier_abonne where email = '$email' and gerance = 'bt'";
 
     $stm = $pdo->prepare($idbt); 
@@ -55,12 +59,12 @@ if($stmt->rowCount() > 0)
     $datab = $stm->fetchAll();
     $idb = $datab[0]["abonne_id"];
 
+    echo '<a class="btn" href="http://localhost:8080/laradeel/facture.php?ide='.$ide.' ">Consulter vos factures d\'eau</a> <br><br>' ; 
+    echo '<a class="btn" href="http://localhost:8080/laradeel/factureBT.php?idb='.$idb.'">Consulter vos factures d\'électricité </a> <br><br><br><br> <br>';
 
-    echo '<a href="http://localhost:8080/laradeel/consommation/'.$ide.'">Consulter votre consommation d\'eau</a> <br> <br> '; 
-    echo '<a href="http://localhost:8080/laradeel/consommation/'.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> '; 
-
-    echo '<a href="http://localhost:8080/laradeel/facture/'.$ide.' ">Consulter vos factures d\'eau</a> <br><br>' ; 
-    echo '<a href="http://localhost:8080/laradeel/facture/'.$idb.'">Consulter vos factures d\'électricité </a> <br>';
+    
+    echo '<a class="btn" class="btn" href="http://localhost:8080/laradeel/consommation.php?ide='.$ide.'">Consulter votre consommation d\'eau</a> <br> <br>  '; 
+    echo '<a class="btn" href="http://localhost:8080/laradeel/consommationBT.php?idb='.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> '; 
   }
   else{
     echo '
@@ -81,5 +85,30 @@ if($stmt->rowCount() > 0)
           
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+  
+  .btn:visited{
+    color: black;
+  }
+  .btn:hover{
+    color: red;
+    font-weight: 700;
+  }
+  h2, h3{
+    margin-left: 200px;
+  }
+  
+  </style>
+</head>
+<body>
 
+</body>
+</html>
 
