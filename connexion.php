@@ -73,7 +73,7 @@ body {
 <div class="col-md-6 login-form-1 login-container">
 <form action="profil.php" method="post" >  
 <input type="email" name="email" placeholder="Email@exemple.com *"  class="form-control" required> <br>
-<input type="password" name="password" placeholder="Mot de passe *" class="form-control" required>
+<input type="password" name="password" placeholder="Mot de passe *" class="form-control" value="" required>
 <a href="">Mot de passe oublié?</a> <br> <br>
 <div class="mb-3">
       <div class="form-check">

@@ -15,9 +15,19 @@ ob_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
+<style>
+img {
+    margin-left: 533px;
+    margin-right: auto;
+}
+</style>
 <body>
-    <br><br><br><br><br>
-    <h2>Vos factures d'eau</h2><br><br>
+    
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary mb-5">
+    <h2 style="color: white; font-weight: bold;">Vos factures d'eau</h2><br><br>
+    <a href="connexion.php" class="btn btn-danger pull-right" style="margin-left: 944px">Se deconnecter</a>
+    </nav><br><br><br>
+    <img src="index.jpg" alt=""><br><br>
 <table class="table table-striped">
     <tr>
     <thead>
@@ -32,6 +42,7 @@ ob_start();
       <th></th>
     </tr>
     </thead>
+    <?php if(count($informations) <= 0){ echo '<div class="alert alert-danger">' . 'votre dossier est en cours de traitement pour consulter vos factures veuillez vous reconnecter ultérieurement ' . '</div>' ;}  ?>
     <?php foreach ($informations as $information): ?>
 
         <tr>

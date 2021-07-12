@@ -71,9 +71,9 @@ img.displayed {
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">Payer en ligne</a></li>
-            <li><a class="dropdown-item" href="#">Réclamer</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="contact.html">Contacter nous</a></li>
+            <li><a class="dropdown-item" href="contact.html">Réclamer</a></li>
+            <!-- <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="contact.html">Contacter nous</a></li> -->
           </ul>
         </li>
         
