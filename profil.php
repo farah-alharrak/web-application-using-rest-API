@@ -1,14 +1,12 @@
 
-
 <?php
 
 
-require 'util.php';
 
-// //init_php_session();
-// $e = $_POST['email'];
-// print_r($_POST);
-// exit;
+// On démarre la session
+session_start();
+$_SESSION['loginOK'] = false; 
+
 
 if(isset($_POST['btn']))
     if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password']))
@@ -18,7 +16,7 @@ if(isset($_POST['btn']))
 $email = $_POST['email'];  
 $password = $_POST['password'];
 
-$pdo = new PDO("mysql:host=localhost;dbname=laradeel", "root", "");
+$pdo = new PDO("mysql:host=localhost;dbname=laradeel", "root", "");   //se connecter à la base de données
 
 $sql = "SELECT * FROM dossier_abonne WHERE email= '$email' ";
 
@@ -27,23 +25,28 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
 
-
 //$user = $stmt->fetch(PDO::FETCH_ASSOC);
-if($stmt->rowCount() > 0)
+
+
+if($stmt->rowCount() > 0) // on vérifie que l'utilisateur existe bien
 {
-  $data = $stmt->fetchAll();
-  if( $password == $data[0]["password"] ) // pour le hashage utiliser password_verify au lieu de == 
+  $data = $stmt->fetchAll();  // stocker les lignes résultats dans la variable data
+  if( $password == $data[0]["password"] ) /* pour le hashage utiliser password_verify au lieu de == */
   {
-    //echo '<br>';
-    echo '<a href="connexion.php" class="btn btn-success pull-right" style="margin-left: ; margin-top:0px;">Se deconnecter</a>' . '<br>' ;
-    echo '  <img src="index.jpg" alt=""> ';
+    $_SESSION['loginOK'] = true;
+
+  }
+  if($_SESSION['loginOK']){
+    echo '<a href="logout.php" class="btn btn-success pull-right" style="margin-left: ; margin-top:0px;">Se deconnecter</a>' . '<br>' ;
+    echo ' <img src="index.jpg" alt="" > ';
     $nom = $data[0]["nom"];
     $prenom = $data[0]["prenom"];
 //     echo '<button type="button" class="btn btn-primary btn-lg active" style="background-color: red;">
 // Revenir à la page précédante </button><br><br> ' ;
-    echo '<h2>' . 'Bonjour ' . '<b>' . $nom  . ' ' . $prenom . '</b>' . ' !' . '</h2>'  ;
+echo '<div class="container2"> ' ;
+    echo ' <div class="x"> ' . '<h2>' . 'Bonjour ' . '<b>' . $nom  . ' ' . $prenom . '</b>' . ' !' . '</h2>'  ;
     echo '<h3>' . 'Bienvenue dans votre compte chez la RADEEL <br><br><br><br>' . '</h3>' ;
-        /// recuperer l'id concernant les contrats d'eau d'un tel client connecté  ///
+        // recuperer l'id concernant les contrats d'eau d'un tel client connecté  ///
 
     $ideau = "SELECT abonne_id FROM dossier_abonne where email = '$email' and gerance = 'eau'";
 
@@ -53,6 +56,8 @@ if($stmt->rowCount() > 0)
     $datae = $stmt->fetchAll();
      
     $ide = $datae[0]["abonne_id"];
+
+    
     echo '<a  class="btn btn-info pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/facture.php?ide='.$ide.' ">Consulter vos factures d\'eau</a> <br><br>' ; 
     echo '<a class="btn btn-info pull-right" style="margin-left: 100px" class="btn" href="http://localhost:8080/laradeel/consommation.php?ide='.$ide.'">Consulter votre consommation d\'eau</a> <br> <br>  '; 
 
@@ -68,10 +73,13 @@ if($stmt->rowCount() > 0)
     if($stm->rowCount() > 0){
     $datab = $stm->fetchAll();
     $idb = $datab[0]["abonne_id"];
-    echo '<br>';
-    echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/factureBT.php?idb='.$idb.'">Consulter vos factures d\'électricité </a> <br><br><br>';
 
-    echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/consommationBT.php?idb='.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> '; 
+    
+
+    echo '<br>';
+    echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/factureBT.php?idb='.$idb.'">Consulter vos factures d\'électricité </a> <br><br>';
+
+    echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/consommationBT.php?idb='.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> ' . '</div>' . '</div>' ; 
   
     }else{echo 'Vous n\'avez pas de contrat d\'abonnement pour l\'électricité';}
     
@@ -85,7 +93,7 @@ if($stmt->rowCount() > 0)
     
      ';
      }   
-}
+}else{echo '<div class="alert alert-danger"> Email incorrect! si vous êtes nouveaux <a href="inscription.php">inscrivez-vous</a> <br>  </div> ';}
     }   
  
           
@@ -102,7 +110,24 @@ if($stmt->rowCount() > 0)
   <title></title>
   <style>
   
+  .container2{ /**conteneur du tout --- background */
+            background-color: #f0f8ff; 
+            /* #6495ed; */
+            display:flex;
+            align-content: center;
+            justify-content: center;
+            
+
+        }
+        .x {  /** conteneur du contenu */
+            /* margin-left: 40%;  */
+            height: auto;
+            background-color:#afeeee; 
+            width: 955px;
+             
+        }
 img {
+  /* width:333px; */
     margin-left: 500px;
     margin-right: auto;
 }
@@ -120,15 +145,30 @@ img {
     font-weight: 700;
   } */
   h2{
-    margin-left: 500px;
+    margin-left: 270px;
   }
   
   h3{
-    margin-left: 400px;
+    margin-left: 170px;
   }
   </style>
 </head>
 <body>
+
+<footer class="text-center text-white " style="background-color: #f0f8ff;">
+  <!-- Grid container -->
+  <div class="container p-4"></div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.06); ">
+  <a href="accueil.php" > accueil</a>
+   <span style="color:black;">|  © 2021 R.A.D.E.E.L :</span>
+    <a href="https://www.linkedin.com/in/farah-al-harrak-522869197/" > FARAH AL HARRAK</a>
+  </div>
+  <!-- Copyright -->
+</footer>
 
 </body>
 </html>

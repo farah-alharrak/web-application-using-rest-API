@@ -1,3 +1,5 @@
+<?php require_once "auth.inc.php" ?>
+
 <?php
 require_once("./index.php");
 
@@ -23,10 +25,11 @@ img {
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary mb-5">
     <h2 style="color: white; font-weight: bold;">Vos factures d'électricité</h2>
-    <a href="connexion.php" class="btn btn-danger pull-right" style="margin-left: 844px">Se deconnecter</a>
+    <a href="logout.php" class="btn btn-danger pull-right" style="margin-left: 844px">Se deconnecter</a>
     </nav><br><br><br>
     <img src="index.jpg" alt=""><br><br>
     <br><br>
+    <div class="container">
 <table class="table table-striped">
     <tr>
     <thead>
@@ -36,7 +39,7 @@ img {
         <th>Montant</th>
         <th>Identifiant</th>
         <th>Réglement</th>
-        <th>Date de paiment</th>
+        <th>Date de paiement</th>
         <th></th>
       <th></th>
     </tr>
@@ -56,6 +59,7 @@ img {
         </tr>
         <?php endforeach; ?>
 </table>
+</div>
 </body>
 </html>
 

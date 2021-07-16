@@ -1,116 +1,164 @@
-<?php
-/** ce fichier sera utile pour la connexion  */
-session_start();
-$erreur  = isset($_SESSION['error']) ? $_SESSION['error'] : null;
 
 
-?>
+
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
+    
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>se connecter</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	<title>Se connecter</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
-  .login-container{
-    
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #EAEAEA;
-    padding: 4rem;
-}
-body {
-  background-color: #17a2b8;
-}
-.btnSubmit{
-  font-weight: 600;
-    width: 30%;
-    color: #FFF;
-    background-color: blue;
-    border: none;
-    border-radius: 1.5rem;
-    padding:2%;
-}
-.dropdown-item{
-  padding: 1rem;
-  margin: 1rem
-}
-.btnw{
-  text-align: left;
-  padding: 0.5rem;
-}
-.last{
-  margin-left: 454px;
-  margin-right: auto;
-    
-    }
-    .dropdown-item :hover{
-      background-color:aqua;
-    }
+    	/* Coded with love by Mutiullah Samim */
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background: #afeeee !important;
+		}
+		.user_card {
+			height: 400px;
+			width: 350px;
+			margin-top: auto;
+			margin-bottom: auto;
+			/* background: #f39c12; */
+			background: #ff6347;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
 
+		}
+		.brand_logo_container {
+			position: absolute;
+			height: 170px;
+			width: 170px;
+			top: -75px;
+			border-radius: 50%;
+			background: #60a3bc;
+			padding: 10px;
+			text-align: center;
+		}
+		.brand_logo {
+			height: 150px;
+			width: 150px;
+			border-radius: 50%;
+			border: 2px solid white;
+		}
+		.form_container {
+			margin-top: 100px;
+		}
+		.login_btn {
+			width: 100%;
+			background: #c0392b !important;
+			color: white !important;
+		}
+		.login_btn:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.login_container {
+			padding: 0 2rem;
+		}
+		.input-group-text {
+			background: #c0392b !important;
+			color: white !important;
+			border: 0 !important;
+			border-radius: 0.25rem 0 0 0.25rem !important;
+		}
+		.input_user,
+		.input_pass:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+			background-color: #c0392b !important;
+		}
 </style>
 </head>
+<!--Coded with love by Mutiullah Samim-->
 <body>
-<img src="RADEEL.png" alt="" width="1347">
+<img src="RADEEL.png" alt="" width="100%">
 <form action="accueil.php">
-        <input type="submit" class="btnw btn-primary btn-lg active" style="background-color: red" value="Revenir à la page d'accueil">
+        <input type="submit" class="btnw btn-primary btn-lg active" style="background-color: red" value="Accueil">
     </form>
-<div class="container">
+    <h1 style="text-align: center; font-weight: bold; color: blue;">Authentification</h1><hr width="400"><br>
 
-<br><br>
-<h1 style="text-align: center; font-weight: bold;">Authentification</h1><hr width="400"><br>
-<?php if($erreur) : ?>
-<!--div class="alert alert-danger">
-  <?= $erreur ?>
-</div-->
-<?php endif ?>
-
-
-<div class="col-md-6 login-form-1 login-container">
-<form action="profil.php" method="post" >  
-<input type="email" name="email" placeholder="Email@exemple.com *"  class="form-control" required> <br>
-<input type="password" name="password" placeholder="Mot de passe *" class="form-control" value="" required>
-<a href="">Mot de passe oublié?</a> <br> <br>
-<div class="mb-3">
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="dropdownCheck">
-        <label class="form-check-label" for="dropdownCheck">
-          Se souvenir de moi
-        </label>
-      </div>
-    </div>
-<input type="submit" name="btn" class="btnSubmit btn-primary" value="Connexion">
-
-</form>
-</div >
-<hr width="600">
-
-
-</div>
-
-</div>
-
-<div class="last">
-  <a class="dropdown-item col-md-5 " href="inscription.php" style="background-color: #EAEAEA; "><b>Nouveau à l'application? Créer un compte</b></a>
-</div>
-<br><br><br><br><br><br>
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="index.jpg" class="brand_logo" alt="Logo">
+					</div>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+                    <!-- le formulaire -->
+					<form action="profil.php" method="post">
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="email" name="email" class="form-control input_user" value="" placeholder="Email@exemple.com" required>
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+							<input type="password" name="password" class="form-control input_pass" value="" placeholder="Mot de passe" required>
+						</div>
+						<div class="form-group">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="customControlInline">
+								<label class="custom-control-label" for="customControlInline">Se souvenir de moi</label>
+							</div>
+						</div>
+							<div class="d-flex justify-content-center mt-3 login_container">
+				 	<button type="submit" name="btn" class="btn login_btn">Connexion</button>
+				   </div>
+					</form>
+                    <!--  -->
+				</div>
+		
+				<div class="mt-4">
+					<div class="d-flex justify-content-center links">
+						Vous n'avez pas de compte? <a href="inscription.php" class="ml-2">S'inscrire</a>
+					</div>
+					<div class="d-flex justify-content-center links">
+						<a href="#">Mot de passe oublié?</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <br>
 <footer class="text-center text-white " style="background-color: #21081a;">
   <!-- Grid container -->
   <div class="container p-4"></div>
   <!-- Grid container -->
 
   <!-- Copyright -->
+  
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); ">
-    © 2021 R.A.D.E.E.L :
+  <a href="accueil.php" > accueil</a>
+   |  © 2021 R.A.D.E.E.L :
     <a href="https://www.linkedin.com/in/farah-al-harrak-522869197/" > FARAH AL HARRAK</a>
   </div>
   <!-- Copyright -->
 </footer>
-
 
 </body>
 </html>

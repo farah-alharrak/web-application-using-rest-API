@@ -3,7 +3,7 @@
 
 function getFactureById($id){
     $pdo = getConnexion(); 
-    $req = "SELECT * from facture where abonnee_id = '$id'"; 
+    $req = "SELECT * from facture where abonnee_id = '$id' ORDER BY date ASC"; 
 
 
 
@@ -18,7 +18,7 @@ function getFactureById($id){
 
 function getConsommationById($id){
     $pdo = getConnexion(); 
-    $req = "SELECT * from consommation where abonne_id = '$id' "; 
+    $req = "SELECT * from consommation where abonne_id = '$id' ORDER BY date ASC"; 
     $stmt = $pdo->prepare($req);
     $stmt->execute();
     $consommation = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -42,7 +42,6 @@ function sendJSON($infos){
     
 }
 
-// $json = json_encode($infos,JSON_UNESCAPED_UNICODE); // le 2eme parametre pour eviter les probs d'accent et d'orthographe ...
-// $informations = json_decode($json,true);
+
 
 ?>

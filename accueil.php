@@ -8,6 +8,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 <style>
+  .container2{ /**conteneur du tout --- background */
+            background-color: #afeeee; 
+            /* #6495ed; */
+            display:flex;
+            align-content: center;
+            justify-content: center;
+            
+
+        }
+        .x {  /** conteneur du contenu */
+            /* margin-left: 40%;  */
+            height: auto;
+            background-color:white; 
+            width: 955px;
+             
+        }
 img.displayed {
     display: block;
     margin-left: auto;
@@ -70,7 +86,7 @@ img.displayed {
             Plus
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Payer en ligne</a></li>
+            <li><a class="dropdown-item" href="paiment.html">Payer en ligne</a></li>
             <li><a class="dropdown-item" href="contact.html">Réclamer</a></li>
             <!-- <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="contact.html">Contacter nous</a></li> -->
@@ -86,13 +102,16 @@ img.displayed {
   </div>
 </nav>
 
+
+
+<div class="container2">
+  <div class="x">
+    
+<div class="container">
 <p>
-    <img src="RADEEL.png" alt=""  height="220" width="1220"/>
+    <img  src="RADEEL.png" alt=""  height="220" width="100%"/>
 </p>
 <br>
-
-<br>
-<div class="container">
 <h1 style="font-family:verdana; color:red; text-align:center;"> <b>Bienvenue chez LA R.A.D.E.E.L</b> en ligne </h1>
 
 <h5 style="text-align:center;">
@@ -115,13 +134,13 @@ img.displayed {
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="RADEEL CoronaVirus.png" class="d-block w-100" alt="...">
+      <img src="RADEEL CoronaVirus.png" class="d-block w-100" alt="..." height="280px">
     </div>
     <div class="carousel-item">
-      <img src="paiement-en-ligne-radeel-min.jpg" class="d-block w-100" alt="...">
+      <img src="paiement-en-ligne-radeel-min.jpg" class="d-block w-100" alt="..." height="280px" >
     </div>
     <div class="carousel-item">
-      <img src="radeel3.jpg" class="d-block w-100" alt="...">
+      <img src="radeel3.jpg" class="d-block w-100" alt="..." height="280px">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -138,7 +157,7 @@ img.displayed {
 
 <div class="bas">
 
-<a href="connexion.php"> Connectez vous </a> pour consulter vos: <br>
+<a href="connecxion.php"> Connectez vous </a> pour consulter vos: <br>
 <ul>
 <li>Factures et règlements</li>
 <li>Consommations</li>
@@ -148,6 +167,9 @@ Si vous êtes nouveaux à l'application veuillez  <a href="inscription.php">s'in
 
 </div>
 
+</div>
+
+</div>
 
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">
@@ -212,7 +234,7 @@ Si vous êtes nouveaux à l'application veuillez  <a href="inscription.php">s'in
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-            Services assuré
+            Services 
           </h6>
           <p>
             <a href="connexion.php" class="text-reset">Consultation de factures</a>
@@ -228,7 +250,7 @@ Si vous êtes nouveaux à l'application veuillez  <a href="inscription.php">s'in
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-            Useful links
+            liens utiles
           </h6>
           <p>
             <a href="inscription.php" class="text-reset">Inscription</a>
@@ -236,7 +258,9 @@ Si vous êtes nouveaux à l'application veuillez  <a href="inscription.php">s'in
           <p>
             <a href="connexion.php" class="text-reset">Connexion</a>
           </p>
-          
+          <p>
+            <a href="paiment.html" class="text-reset">Paiement en ligne</a>
+          </p>
         </div>
         <!-- Grid column -->
 
