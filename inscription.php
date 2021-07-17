@@ -156,7 +156,7 @@ function get_action(form)
                                 <h3 class="register-heading" style=" margin-top: 100px; font-weight: bold; color: blue; ">Inscription</h3>
                                 <div class="row register-form">
                                     <div class="col-md-6">
-                                    <form action="register.php" method="post">
+                                    <form action="register.php" method="post" onsubmit="return myFunction()">
                                         <div class="form-group">
                                         CIN<input type="text" class="form-control" placeholder="CIN *" value=""  name="cin" required/>
                                         </div>
@@ -167,10 +167,10 @@ function get_action(form)
                                         Prenom<input type="text" class="form-control" placeholder="Prenom *" value="" name="prenom" required/>
                                         </div>
                                         <div class="form-group">
-                                        Mot de passe<input type="password" class="form-control" placeholder="Mot de passe *" value="" name="password" required/>
+                                        Mot de passe<input type="password" class="form-control" id="password" placeholder="Mot de passe *" value="" name="password" minlength="8" required/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control"  placeholder="Confirmer le mot de passe *" value="" name="repeatpassword" required/>
+                                            <input type="password" class="form-control" id="repeatpassword" placeholder="Confirmer le mot de passe *" value="" name="repeatpassword" required/>
                                         </div>
                                         
                                     </div>
@@ -182,14 +182,15 @@ function get_action(form)
                                         Adresse<input type="text"  name="adresse" class="form-control" placeholder="Votre adresse *" value="" name="adresse" required/>
                                         </div>
                                         <div class="form-group">
-                                        Gérance<input type="text"  name="gerance" class="form-control" placeholder="gérance (eau ou bt) *" value="" name="gerance" required/> 
-                                    <!-- Gérance <select name="gerance" id=""> 
-                                        <option value="">eau</option>
-                                        <option value="">BT</option>
-                                    </select>     -->
+                                        <!-- Gérance<input type="text"  name="gerance" class="form-control" placeholder="gérance (eau ou bt) *" value="" name="gerance" required/>  -->
+                                     <select name="gerance" id="">
+                                        <option value=""> ----- Gérance ----- </option> 
+                                        <option value="eau" >Eau</option>
+                                        <option value="bt" >BT</option>
+                                    </select>    
                                     </div>
                                         
-                        <input type="submit" name="btn" class="btnRegister"  value="s'inscrire"/>
+                        <input type="submit" name="btn" class="btnRegister"  value="s'inscrire" />
                         </form>
                             </div> 
                         </div>
@@ -208,6 +209,22 @@ function get_action(form)
   </div>
 </footer>
 
+
+<script>
+    // pour la vérification des données du côté client
+function myFunction() {
+    var password = document.getElementById('password').value; 
+    var repeatpassword = document.getElementById('repeatpassword').value;
+    if(password != repeatpassword){
+        alert("Confirmer le mot de passe ");
+        return false;
+    }
+    else
+        return true;
+
+}
+
+</script>
 </body>
 </html>
 

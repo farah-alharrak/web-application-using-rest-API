@@ -62,7 +62,7 @@ echo '<div class="container2"> ' ;
     echo '<a class="btn btn-info pull-right" style="margin-left: 100px" class="btn" href="http://localhost:8080/laradeel/consommation.php?ide='.$ide.'">Consulter votre consommation d\'eau</a> <br> <br>  '; 
 
 
-    }else{echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'eau' . '</div>';}
+    }else{echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'eau. Abonnez vous chez RADEEL pour bénéficier de nos services! ' . '</div>';}
 
        /// recuperer l'id concernant les contrats d'electricité d'un tel client connecté  ///
 
@@ -81,7 +81,7 @@ echo '<div class="container2"> ' ;
 
     echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/consommationBT.php?idb='.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> ' . '</div>' . '</div>' ; 
   
-    }else{echo 'Vous n\'avez pas de contrat d\'abonnement pour l\'électricité';}
+    }else{echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'électricité. Abonnez vous chez RADEEL pour bénéficier de nos services!' . '</div>';}
     
     }
   else{
