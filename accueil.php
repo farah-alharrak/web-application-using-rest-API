@@ -157,7 +157,7 @@ img.displayed {
 
 <div class="bas">
 
-<a href="connecxion.php"> Connectez vous </a> pour consulter vos: <br>
+<a href="connexion.php"> Connectez vous </a> pour consulter vos: <br>
 <ul>
 <li>Factures et règlements</li>
 <li>Consommations</li>
