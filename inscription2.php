@@ -147,7 +147,6 @@ function get_action(form)
                         <img src="index.jpg" alt=""/>
                         <h3>Bienvenue</h3>
                         <p>inscrivez-vous gratuitement pour consulter vos factures et consommation</p>
-                        <a href="accueil.php">revenir à l'accueil</a>
                         
                     </div>
                     <div class="col-md-9 register-right">
@@ -157,9 +156,9 @@ function get_action(form)
                                 <h3 class="register-heading" style=" margin-top: 100px; font-weight: bold; color: blue; ">Inscription</h3>
                                 <div class="row register-form">
                                     <div class="col-md-6">
-                                    <form action="register.php" method="post" onsubmit="return myFunction()">
+                                    <form action="register2.php" method="post" onsubmit="return myFunction()">
                                         <div class="form-group">
-                                        CIN<input type="text" class="form-control" placeholder="CIN *" value=""  name="cin" required/>
+                                        Numéro du contrat<input type="text" class="form-control" placeholder="identifiant du contrat *" value=""  name="contrat" required/>
                                         </div>
                                         <div class="form-group">
                                         Nom<input type="text" class="form-control" placeholder="Nom *" value="" name="nom" required/>
@@ -188,20 +187,17 @@ function get_action(form)
                                         <option value=""> ----- Gérance ----- </option> 
                                         <option value="eau" >Eau</option>
                                         <option value="bt" >Electricité(BT)</option>
-                                    </select> 
+                                    </select><br> 
                                     <!-- <p>NB:Si vous êtes déja inscrits pour une gérance il vous faut s'inscrire avec le même email et mot de passe pour l'autre gérance</p> -->
    
                                     </div>
-                                        
                         <input type="submit" name="btn" class="btnRegister"  value="s'inscrire" />
                         </form>
                             </div> 
-                            <a href="inscription2.php">inscrivez-vous avec vos identifiants de contrats</a>
-
                         </div>
-
                     </div>
                 </div>
+                
             </div>
             <br><br>
             <footer class="text-center text-white ">

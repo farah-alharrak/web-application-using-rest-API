@@ -54,7 +54,7 @@ paths:
       - "connexion"
       summary: "connecter un utilisateur à son compte RADEEL"
       description: ""
-      operationId: "addPet"
+      
       consumes:
       - "application/json"
       - "application/xml"
@@ -83,7 +83,7 @@ paths:
       summary: " les factures d'un client by Id au format JSON dans le corps de la requête"
  
       description: ""
-      operationId: "addPet"
+      
       consumes:
       - "application/json"
       - "application/xml"
@@ -104,60 +104,8 @@ paths:
       - petstore_auth:
         - "write:pets"
         - "read:pets"
-  /facture.php?ide:
-    get:
-      tags:
-      - "facturation"
-      summary: "Consulter les factures d'eau by Id"
-      description: ""
-      operationId: "addPet"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        "405":
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /factureBT.php?idb:      
-    get:
-      tags:
-      - "facturation"
-      summary: "Consulter les factures d'électricité by Id"
-      description: ""
-      operationId: "addPet"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        "405":
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+  
+  
   /consommation/:id:      
     get:
       tags:
@@ -165,7 +113,7 @@ paths:
       summary: " la consommation d'un client by Id au format JSON dans le corps de la requête"
  
       description: ""
-      operationId: "addPet"
+      
       consumes:
       - "application/json"
       - "application/xml"
@@ -186,60 +134,8 @@ paths:
       - petstore_auth:
         - "write:pets"
         - "read:pets"      
-  /consommation.php?ide:
-    get:
-      tags:
-      - "consommation"
-      summary: "Consulter la consommation d'eau by Id"
-      description: ""
-      operationId: "addPet"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        "405":
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /consommationBT.php?idb:
-    get:
-      tags:
-      - "consommation"
-      summary: "Consulter la consommation d'électricité by Id"
-      description: ""
-      operationId: "addPet"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        "405":
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+  
+  
   
   
     

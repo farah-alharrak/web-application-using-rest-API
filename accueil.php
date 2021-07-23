@@ -112,10 +112,10 @@ img.displayed {
     <img  src="RADEEL.png" alt=""  height="220" width="100%"/>
 </p>
 <br>
-<h1 style="font-family:verdana; color:red; text-align:center;"> <b>Bienvenue chez LA R.A.D.E.E.L</b> en ligne </h1>
+<h1 style="font-family:verdana; color:red; text-align:center; font-family: gras_italique_serif"> <b>Bienvenue chez La R.A.D.E.E.L</b> en ligne </h1>
 
 <h5 style="text-align:center;">
-<b>R.A.D.E.E.L. La Régie Autonome Intercommunale de Distribution d'Eau et d'Electricité de la Province de LARACHE
+<b>R.A.D.E.E.L La Régie Autonome Intercommunale de Distribution d'Eau et d'Electricité de la Province de LARACHE
 
 </b>
 </h5>

@@ -3,8 +3,8 @@
 
 
 if(isset($_POST['btn'])){
-    if(isset($_POST['email']) && isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['repeatpassword']) && isset($_POST['prenom']) && isset($_POST['cin']) && isset($_POST['adresse']) && isset($_POST['gerance']))
-        {   $cin = $_POST['cin'];
+    if(isset($_POST['email']) && isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['repeatpassword']) && isset($_POST['prenom']) && isset($_POST['contrat']) && isset($_POST['adresse']) && isset($_POST['gerance']))
+        {   $contrat = $_POST['contrat'];
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
             $email = $_POST['email'];
@@ -18,20 +18,20 @@ if(isset($_POST['btn'])){
             if($password==$repeatpassword){
                 $pdo = new PDO("mysql:host=localhost;dbname=laradeel", "root", "");
 
-    $sql = "INSERT INTO dossier_abonne values('','$cin', '$nom', '$prenom', '$email', '$password','','$adresse', '$gerance','en depot') ";
+    $sql = "INSERT INTO dossier_abonne values('','', '$nom', '$prenom', '$email', '$password','','$adresse', '$gerance','en depot') ";
 
     $stmt = $pdo->prepare($sql); 
 
     $stmt->execute();
-    /// tester si le cin et la gerance correspondante dans le formulaire (càd le contrat) existent dans notre BD puis faire le update du abonne_dossier
-    $sql = "SELECT cin FROM dossier_contrat where cin='$cin' and gerance='$gerance'";
+    /// tester si le id du contrat existe dans notre BD faire le update du abonne_dossier
+    $sql = "SELECT num_contrat FROM dossier_contrat where num_contrat='$contrat' and gerance='$gerance'";
     $stmt = $pdo->prepare($sql); 
 
     $stmt->execute();
-    if($stmt->rowCount() > 0){// cad cin existe
+    if($stmt->rowCount() > 0){// cad l'id contrat existe
          
-        // recuperer l'id d'utilisateur ayant le cin et la gerance concernés
-        $sql = "SELECT abonne_id FROM dossier_abonne WHERE cin='$cin' and gerance='$gerance' ";
+        // recuperer l'id d'utilisateur inscrit tout à l'heure 
+        $sql = "SELECT abonne_id FROM dossier_abonne WHERE email='$email' and gerance='$gerance' ";
 
         $stmt = $pdo->prepare($sql); 
 
@@ -40,18 +40,10 @@ if(isset($_POST['btn'])){
         $row = $stmt->fetchAll();  
         $id_recuperé = $row[0]["abonne_id"];
  
-        // recuperer le numero de contrat 
-        $sql2 = "SELECT num_contrat FROM dossier_contrat WHERE cin='$cin' and gerance='$gerance' ";
-
-        $stmt2 = $pdo->prepare($sql2); 
-
-        $stmt2->execute();
-
-        $row2 = $stmt2->fetchAll();  
-        $numContrat = $row2[0]["num_contrat"];
+        
 
         // faire la mise à jour
-        $sql = "UPDATE dossier_contrat SET id_user = $id_recuperé WHERE num_contrat='$numContrat' and gerance='$gerance' ";
+        $sql = "UPDATE dossier_contrat SET id_user = $id_recuperé WHERE num_contrat='$contrat' and gerance='$gerance' ";
 
         $stmt = $pdo->prepare($sql); 
 
@@ -59,7 +51,7 @@ if(isset($_POST['btn'])){
 
 
 
-        $sql = "UPDATE facture SET abonnee_id = $id_recuperé WHERE num_contrat='$numContrat' and gerance='$gerance' ";
+        $sql = "UPDATE facture SET abonnee_id = $id_recuperé WHERE num_contrat='$contrat' and gerance='$gerance' ";
 
         $stmt = $pdo->prepare($sql); 
 
@@ -67,7 +59,7 @@ if(isset($_POST['btn'])){
 
 
 
-        $sql = "UPDATE consommation SET abonne_id = $id_recuperé WHERE num_contrat='$numContrat' and gerance='$gerance' ";
+        $sql = "UPDATE consommation SET abonne_id = $id_recuperé WHERE num_contrat='$contrat' and gerance='$gerance' ";
 
         $stmt = $pdo->prepare($sql); 
 
@@ -76,7 +68,7 @@ if(isset($_POST['btn'])){
 
         echo '<div class="alert alert-info">'.'inscription effectuée ' . '<a href="connexion.php">connectez-vous</a>'. '</div>' ;
 
-    }else{echo '<div class="alert alert-danger">'.'votre cin ne correspond à aucun contrat d\'abonnment chez la RADEEL. vérifiez le ou ' . '<a href="inscription2.php">inscrivez-vous avec vos numéros de contrats </a>'. '</div>' ;}
+    }else{echo '<div class="alert alert-danger">'.'l\'identifiant que vous avez saisi ne correspond à aucun contrat d\'abonnment chez la RADEEL. vérifiez le' . '</div>' ;}
 
 
             }else{echo '<div class="alert alert-danger">'.'Le mot de passe n\'est pas bien confirmé' . '</div>';

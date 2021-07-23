@@ -41,14 +41,24 @@ if($stmt->rowCount() > 0) // on vérifie que l'utilisateur existe bien
     echo ' <img src="index.jpg" alt="" > ';
     $nom = $data[0]["nom"];
     $prenom = $data[0]["prenom"];
-//     echo '<button type="button" class="btn btn-primary btn-lg active" style="background-color: red;">
-// Revenir à la page précédante </button><br><br> ' ;
-echo '<div class="container2"> ' ;
+
+    echo '<div class="container2"> ' ;
     echo ' <div class="x"> ' . '<h2>' . 'Bonjour ' . '<b>' . $nom  . ' ' . $prenom . '</b>' . ' !' . '</h2>'  ;
     echo '<h3>' . 'Bienvenue dans votre compte chez la RADEEL <br><br><br><br>' . '</h3>' ;
-        // recuperer l'id concernant les contrats d'eau d'un tel client connecté  ///
+        // recuperer l'id_user concernant les contrats d'eau d'un tel client connecté  ///
 
-    $ideau = "SELECT abonne_id FROM dossier_abonne where email = '$email' and gerance = 'eau'";
+// pour cela on doit recuperer cin et gerance de dossier abonne pour savoir le numContrat de dossier_contrat
+
+$cin_user = "SELECT cin FROM dossier_abonne where email = '$email' and gerance = 'eau'";
+$stmt = $pdo->prepare($cin_user); 
+$stmt->execute();
+
+if($stmt->rowCount() > 0){ // càd il y'a dans la base de données le cin associé à l'utilisateur connecté 
+
+$data = $stmt->fetchAll();
+$cin = $data[0]["cin"];
+
+     $ideau = "SELECT abonne_id FROM dossier_abonne where cin = '$cin' and gerance = 'eau'";
 
     $stmt = $pdo->prepare($ideau); 
     $stmt->execute();
@@ -62,10 +72,55 @@ echo '<div class="container2"> ' ;
     echo '<a class="btn btn-info pull-right" style="margin-left: 100px" class="btn" href="http://localhost:8080/laradeel/consommation.php?ide='.$ide.'">Consulter votre consommation d\'eau</a> <br> <br>  '; 
 
 
-    }else{echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'eau. Abonnez vous chez RADEEL pour bénéficier de nos services! ' . '</div>';}
+    }else{/*echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'eau. ' . '</div>';*/}
+
+  }else{ // y'a pas dans la base de données le cin associé à l'utilisateur connecté et donc on recupère l'id par mail au lieu du cin
+  $ideau = "SELECT abonne_id FROM dossier_abonne where email = '$email' and gerance = 'eau'";
+
+  $stmt = $pdo->prepare($ideau); 
+  $stmt->execute();
+  if($stmt->rowCount() > 0){
+  $datae = $stmt->fetchAll();
+   
+  $ide = $datae[0]["abonne_id"];
+
+  
+  echo '<a  class="btn btn-info pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/facture.php?ide='.$ide.' ">Consulter vos factures d\'eau</a> <br><br>' ; 
+  echo '<a class="btn btn-info pull-right" style="margin-left: 100px" class="btn" href="http://localhost:8080/laradeel/consommation.php?ide='.$ide.'">Consulter votre consommation d\'eau</a> <br> <br>  '; 
+
+
+  }else{/*echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'eau. Abonnez vous chez RADEEL pour bénéficier de nos services! ' . '</div>';*/}
+}
+
 
        /// recuperer l'id concernant les contrats d'electricité d'un tel client connecté  ///
 
+$cin_user = "SELECT cin FROM dossier_abonne where email = '$email' and gerance = 'eau'";
+$stmt = $pdo->prepare($cin_user); 
+$stmt->execute();
+
+if($stmt->rowCount() > 0){ // càd il y'a dans la base de données le cin associé à l'utilisateur connecté 
+$data = $stmt->fetchAll();
+$cin = $data[0]["cin"];
+
+    $idbt = "SELECT abonne_id FROM dossier_abonne where cin = '$cin' and gerance = 'bt'";
+
+    $stm = $pdo->prepare($idbt); 
+    $stm->execute();
+    if($stm->rowCount() > 0){
+    $datab = $stm->fetchAll();
+    $idb = $datab[0]["abonne_id"];
+
+    
+
+    echo '<br>';
+    echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/factureBT.php?idb='.$idb.'">Consulter vos factures d\'électricité </a> <br><br>';
+
+    echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/consommationBT.php?idb='.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> ' . '</div>' . '</div>' ; 
+  
+    }else{/*echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'électricité. Abonnez vous chez RADEEL pour bénéficier de nos services!' . '</div>';*/}
+    
+   }else{ // y'a pas dans la base de données le cin associé à l'utilisateur connecté 
     $idbt = "SELECT abonne_id FROM dossier_abonne where email = '$email' and gerance = 'bt'";
 
     $stm = $pdo->prepare($idbt); 
@@ -81,9 +136,14 @@ echo '<div class="container2"> ' ;
 
     echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/consommationBT.php?idb='.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> ' . '</div>' . '</div>' ; 
   
-    }else{echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'électricité. Abonnez vous chez RADEEL pour bénéficier de nos services!' . '</div>';}
+    }else{/*echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'électricité. Abonnez vous chez RADEEL pour bénéficier de nos services!' . '</div>';*/}
     
-    }
+   
+   }
+  
+  
+  
+  }
   else{
     echo '
     
@@ -94,8 +154,8 @@ echo '<div class="container2"> ' ;
      ';
      }   
 }else{echo '<div class="alert alert-danger"> Email incorrect! si vous êtes nouveaux <a href="inscription.php">inscrivez-vous</a> <br>  </div> ';}
-    }   
- 
+}
+  
           
 ?>
 
