@@ -1,7 +1,7 @@
 <?php require_once "auth.inc.php" ?>
 
 <?php
-require_once("./index.php");
+//require_once("./index.php");
 
 $informations = json_decode(file_get_contents("http://localhost:8080/laradeel/facture/".$_GET['idb']));
 ob_start();

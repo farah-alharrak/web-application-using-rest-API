@@ -74,6 +74,8 @@ $cin = $data[0]["cin"];
 
     }else{/*echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'eau. ' . '</div>';*/}
 
+  
+  
   }else{ // y'a pas dans la base de données le cin associé à l'utilisateur connecté et donc on recupère l'id par mail au lieu du cin
   $ideau = "SELECT abonne_id FROM dossier_abonne where email = '$email' and gerance = 'eau'";
 
@@ -95,7 +97,7 @@ $cin = $data[0]["cin"];
 
        /// recuperer l'id concernant les contrats d'electricité d'un tel client connecté  ///
 
-$cin_user = "SELECT cin FROM dossier_abonne where email = '$email' and gerance = 'eau'";
+$cin_user = "SELECT cin FROM dossier_abonne where email = '$email' and gerance = 'bt'";
 $stmt = $pdo->prepare($cin_user); 
 $stmt->execute();
 
