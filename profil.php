@@ -58,6 +58,11 @@ if($stmt->rowCount() > 0){ // càd il y'a dans la base de données le cin associ
 $data = $stmt->fetchAll();
 $cin = $data[0]["cin"];
 
+
+                      //!!!!!!!!essayer chercher le num contrat au lieu de id user !!!!!!!!
+
+
+
      $ideau = "SELECT abonne_id FROM dossier_abonne where cin = '$cin' and gerance = 'eau'";
 
     $stmt = $pdo->prepare($ideau); 
@@ -65,12 +70,21 @@ $cin = $data[0]["cin"];
     if($stmt->rowCount() > 0){
     $datae = $stmt->fetchAll();
      
-    $ide = $datae[0]["abonne_id"];
+    $idee = $datae[0]["abonne_id"];
 
+    /// recuperer le num contrat associé à ce idee
+    $ideau = "SELECT num_contrat FROM dossier_contrat where id_user='$idee'";
+
+    $stmt = $pdo->prepare($ideau); 
+    $stmt->execute();
+    if($stmt->rowCount() > 0){
+    $datae = $stmt->fetchAll();
+     
+    $ide = $datae[0]["num_contrat"];
     
     echo '<a  class="btn btn-info pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/facture.php?ide='.$ide.' ">Consulter vos factures d\'eau</a> <br><br>' ; 
     echo '<a class="btn btn-info pull-right" style="margin-left: 100px" class="btn" href="http://localhost:8080/laradeel/consommation.php?ide='.$ide.'">Consulter votre consommation d\'eau</a> <br> <br>  '; 
-
+    }else{}
 
     }else{/*echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'eau. ' . '</div>';*/}
 
@@ -84,12 +98,23 @@ $cin = $data[0]["cin"];
   if($stmt->rowCount() > 0){
   $datae = $stmt->fetchAll();
    
-  $ide = $datae[0]["abonne_id"];
+  $idee = $datae[0]["abonne_id"];
+
+  /// recuperer le num contrat associé à ce idee
+  $ideau = "SELECT num_contrat FROM dossier_contrat where id_user='$idee'";
+
+  $stmt = $pdo->prepare($ideau); 
+  $stmt->execute();
+  if($stmt->rowCount() > 0){
+  $datae = $stmt->fetchAll();
+   
+  $ide = $datae[0]["num_contrat"];
 
   
-  echo '<a  class="btn btn-info pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/facture.php?ide='.$ide.' ">Consulter vos factures d\'eau</a> <br><br>' ; 
-  echo '<a class="btn btn-info pull-right" style="margin-left: 100px" class="btn" href="http://localhost:8080/laradeel/consommation.php?ide='.$ide.'">Consulter votre consommation d\'eau</a> <br> <br>  '; 
-
+  // echo '<a  class="btn btn-info pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/facture.php?ide='.$ide.' ">Consulter vos factures d\'eau</a> <br><br>' ; 
+  // echo '<a class="btn btn-info pull-right" style="margin-left: 100px" class="btn" href="http://localhost:8080/laradeel/consommation.php?ide='.$ide.'">Consulter votre consommation d\'eau</a> <br> <br>  '; 
+  
+}else{}
 
   }else{/*echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'eau. Abonnez vous chez RADEEL pour bénéficier de nos services! ' . '</div>';*/}
 }
@@ -111,15 +136,25 @@ $cin = $data[0]["cin"];
     $stm->execute();
     if($stm->rowCount() > 0){
     $datab = $stm->fetchAll();
-    $idb = $datab[0]["abonne_id"];
+    $idbb = $datab[0]["abonne_id"];
 
-    
+    /// recuperer le num contrat associé à ce idbb
+    $idbt = "SELECT num_contrat FROM dossier_contrat where id_user='$idbb'";
+
+    $stmt = $pdo->prepare($idbt); 
+    $stmt->execute();
+    if($stmt->rowCount() > 0){
+    $datab = $stmt->fetchAll();
+     
+    $idb = $datab[0]["num_contrat"];
 
     echo '<br>';
     echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/factureBT.php?idb='.$idb.'">Consulter vos factures d\'électricité </a> <br><br>';
 
     echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/consommationBT.php?idb='.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> ' . '</div>' . '</div>' ; 
-  
+    }else{}
+
+
     }else{/*echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'électricité. Abonnez vous chez RADEEL pour bénéficier de nos services!' . '</div>';*/}
     
    }else{ // y'a pas dans la base de données le cin associé à l'utilisateur connecté 
@@ -134,9 +169,9 @@ $cin = $data[0]["cin"];
     
 
     echo '<br>';
-    echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/factureBT.php?idb='.$idb.'">Consulter vos factures d\'électricité </a> <br><br>';
+    // echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/factureBT.php?idb='.$idb.'">Consulter vos factures d\'électricité </a> <br><br>';
 
-    echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/consommationBT.php?idb='.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> ' . '</div>' . '</div>' ; 
+    // echo '<a class="btn btn-danger pull-right" style="margin-left: 100px" href="http://localhost:8080/laradeel/consommationBT.php?idb='.$idb.'">Consulter votre consommation d\'électricité</a> <br> <br> ' . '</div>' . '</div>' ; 
   
     }else{/*echo '<div class="alert alert-danger">' . 'Vous n\'avez pas de contrat d\'abonnement pour l\'électricité. Abonnez vous chez RADEEL pour bénéficier de nos services!' . '</div>';*/}
     

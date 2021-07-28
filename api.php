@@ -3,7 +3,7 @@
 
 function getFactureById($id){
     $pdo = getConnexion(); 
-    $req = "SELECT * from facture where abonnee_id = '$id' ORDER BY date ASC"; 
+    $req = "SELECT * from facture where num_contrat = '$id' ORDER BY date ASC"; 
 
 
 
@@ -18,7 +18,7 @@ function getFactureById($id){
 
 function getConsommationById($id){
     $pdo = getConnexion(); 
-    $req = "SELECT * from consommation where abonne_id = '$id' ORDER BY date ASC"; 
+    $req = "SELECT * from consommation where num_contrat = '$id' ORDER BY date ASC"; 
     $stmt = $pdo->prepare($req);
     $stmt->execute();
     $consommation = $stmt->fetchAll(PDO::FETCH_ASSOC);

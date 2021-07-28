@@ -76,7 +76,49 @@ if(isset($_POST['btn'])){
 
         echo '<div class="alert alert-info">'.'inscription effectuée ' . '<a href="connexion.php">connectez-vous</a>'. '</div>' ;
 
-    }else{echo '<div class="alert alert-danger">'.'votre cin ne correspond à aucun contrat d\'abonnment chez la RADEEL. vérifiez le ou ' . '<a href="inscription2.php">inscrivez-vous avec vos numéros de contrats </a>'. '</div>' ;}
+    }else{echo '<div class="alert alert-danger">'.'votre cin ne correspond à aucun contrat d\'abonnment chez la RADEEL. vérifiez le ou ' . '<a href="inscription2.php">inscrivez-vous avec vos numéros de contrats </a>'. '</div>' ;
+
+           echo ' <div class="container register">
+           <!--  -->
+                           <div class="row">
+                               
+                               <div class="col-md-9 register-right">
+                                   
+                                   <div class="tab-content" id="myTabContent">
+                                       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                           <div class="row register-form">
+                                               <div class="col-md-6">
+                                               <form action="register2.php?cin='.$cin.'" method="post" onsubmit="return myFunction()">
+                                                   <div class="form-group">
+                                                   Numéro du contrat<input type="text" class="form-control" placeholder="identifiant du contrat *" value=""  name="contrat" required/>
+                                                   </div>
+                                                    
+                                                   
+                                               </div>
+                                               <div class="col-md-6">
+                                                   
+                                                   
+                                                   <div class="form-group"> 
+                                                   <br> 
+                                                   <!-- Gérance<input type="text"  name="gerance" class="form-control" placeholder="gérance (eau ou bt) *" value="" name="gerance" required/>  -->
+                                                <select name="gerance" id="">
+                                                   <option value=""> ----- Gérance ----- </option> 
+                                                   <option value="eau" >Eau</option>
+                                                   <option value="bt" >Electricité(BT)</option>
+                                               </select><br> 
+              
+                                               </div>
+                                               <br>
+                                   <input type="submit" name="btn" class="btnRegister"  value="valider" style="color: blue" />
+                                   </form>
+                                       </div> 
+                                   </div>
+                               </div>
+                           </div>
+                           
+                       </div>';
+    
+    }
 
 
             }else{echo '<div class="alert alert-danger">'.'Le mot de passe n\'est pas bien confirmé' . '</div>';
