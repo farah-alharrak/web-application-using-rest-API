@@ -76,7 +76,7 @@ if(isset($_POST['btn'])){
 
         echo '<div class="alert alert-info">'.'inscription effectuée ' . '<a href="connexion.php">connectez-vous</a>'. '</div>' ;
 
-    }else{echo '<div class="alert alert-danger">'.'votre cin ne correspond à aucun contrat d\'abonnment chez la RADEEL. vérifiez le ou ' . '<a href="inscription2.php">inscrivez-vous avec vos numéros de contrats </a>'. '</div>' ;
+    }else{echo '<div class="alert alert-danger">'.'votre cin ne correspond à aucun contrat d\'abonnment chez la RADEEL. vérifiez le ou essayez de continuer l\'inscription avec vos identifiants de cotrats ' . '</div>' ;
 
            echo ' <div class="container register">
            <!--  -->
