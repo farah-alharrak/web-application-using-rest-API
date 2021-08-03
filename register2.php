@@ -3,17 +3,17 @@
 $cin = $_GET['cin'];
 
 if(isset($_POST['btn'])){
-    if(isset($_POST['contrat']) && isset($_POST['gerance']))
-        {   $contrat = $_POST['contrat'];
+    if(isset($_POST['contratEau']) && isset($_POST['contratBt']))
+        {   $contratEau = $_POST['contratEau'];
             
-            $gerance = $_POST['gerance'];
+            $contratBt = $_POST['contratBt'];  
 
         }
     
 
         $pdo = new PDO("mysql:host=localhost;dbname=laradeel", "root", ""); // se connecter à la base de données
 
-        $sql = "SELECT num_contrat FROM dossier_contrat where num_contrat='$contrat'";
+        $sql = "SELECT num_contrat FROM dossier_contrat where num_contrat='$contratEau'";
         $stmt = $pdo->prepare($sql); 
 
         $stmt->execute();
@@ -21,7 +21,7 @@ if(isset($_POST['btn'])){
             
 
 
-        $sql = "SELECT abonne_id FROM dossier_abonne where cin='$cin' and gerance='$gerance'";
+        $sql = "SELECT abonne_id FROM dossier_abonne where cin='$cin' and gerance='eau'";
         $stmt = $pdo->prepare($sql); 
 
         $stmt->execute();
@@ -31,12 +31,12 @@ if(isset($_POST['btn'])){
 
         /// update le abonne_id du utilisateur et le mettre en place le cin
 
-        $sql = " UPDATE dossier_contrat set id_user='$id_recuperé' where num_contrat='$contrat' and gerance='$gerance'";
+        $sql = " UPDATE dossier_contrat set id_user='$id_recuperé' where num_contrat='$contratEau' and gerance='eau'";
         $stmt = $pdo->prepare($sql); 
 
         $stmt->execute();
 
-        $sql = " UPDATE dossier_contrat set cin='$cin' where num_contrat='$contrat' and gerance='$gerance'";
+        $sql = " UPDATE dossier_contrat set cin='$cin' where num_contrat='$contratEau' and gerance='eau'";
         $stmt = $pdo->prepare($sql); 
 
         $stmt->execute();
@@ -44,31 +44,82 @@ if(isset($_POST['btn'])){
 
 
         /// 
-        $sql = " UPDATE facture set abonnee_id='$id_recuperé'  where num_contrat='$contrat' and gerance='$gerance'";
+        $sql = " UPDATE facture set abonnee_id='$id_recuperé'  where num_contrat='$contratEau' and gerance='eau'";
         $stmt = $pdo->prepare($sql); 
 
         $stmt->execute();
 
         ///
-        $sql = " UPDATE consommation set abonne_id='$id_recuperé'  where num_contrat='$contrat' and gerance='$gerance'";
+        $sql = " UPDATE consommation set abonne_id='$id_recuperé'  where num_contrat='$contratEau' and gerance='eau'";
+        $stmt = $pdo->prepare($sql); 
+
+        $stmt->execute();
+
+////////////////////////////////////////////////////////////////
+
+
+$sql = "SELECT abonne_id FROM dossier_abonne where cin='$cin' and gerance='bt'";
+        $stmt = $pdo->prepare($sql); 
+
+        $stmt->execute();
+        $row = $stmt->fetchAll();  
+        $id_recuperé = $row[0]["abonne_id"];
+
+
+        /// update le abonne_id du utilisateur et le mettre en place le cin
+
+        $sql = " UPDATE dossier_contrat set id_user='$id_recuperé' where num_contrat='$contratBt' and gerance='bt'";
+        $stmt = $pdo->prepare($sql); 
+
+        $stmt->execute();
+
+        $sql = " UPDATE dossier_contrat set cin='$cin' where num_contrat='$contratBt' and gerance='bt'";
         $stmt = $pdo->prepare($sql); 
 
         $stmt->execute();
         
+
+
+        /// 
+        $sql = " UPDATE facture set abonnee_id='$id_recuperé'  where num_contrat='$contratBt' and gerance='bt'";
+        $stmt = $pdo->prepare($sql); 
+
+        $stmt->execute();
+
+        ///
+        $sql = " UPDATE consommation set abonne_id='$id_recuperé'  where num_contrat='$contratBt' and gerance='bt'";
+        $stmt = $pdo->prepare($sql); 
+
+        $stmt->execute();
+
+        
         echo '<div class="alert alert-info">'.'inscription effectuée ' . '<a href="connexion.php">connectez-vous</a>'. '</div>' ;
 
         }else{
-            $sql = "SELECT abonne_id FROM dossier_abonne where cin='$cin' and gerance='$gerance'";
+            $sql = "SELECT abonne_id FROM dossier_abonne where cin='$cin' and gerance='eau'";
             $stmt = $pdo->prepare($sql); 
             $stmt->execute();
             $row = $stmt->fetchAll();  
             $id_recuperé = $row[0]["abonne_id"];
 
-            /// supprimer ce qu'on a ajouté tout à l'heure lors d el'inscription
-            $sql= "DELETE FROM dossier_abonne where abonne_id='$id_recuperé' and gerance='$gerance'";
+            /// supprimer ce qu'on a ajouté tout à l'heure lors de l'inscription
+            $sql= "DELETE FROM dossier_abonne where abonne_id='$id_recuperé' and gerance='eau'";
             $stmt = $pdo->prepare($sql); 
             $stmt->execute();
-            echo '<div class="alert alert-danger">'.'le numéro que vous avez saisi ne correspond à aucun contrat d\'abonnment chez la RADEEL'.'</div>';}
+
+
+            $sql = "SELECT abonne_id FROM dossier_abonne where cin='$cin' and gerance='bt'";
+            $stmt = $pdo->prepare($sql); 
+            $stmt->execute();
+            $row = $stmt->fetchAll();  
+            $id_recuperé = $row[0]["abonne_id"];
+
+            /// supprimer ce qu'on a ajouté tout à l'heure lors de l'inscription
+            $sql= "DELETE FROM dossier_abonne where abonne_id='$id_recuperé' and gerance='bt'";
+            $stmt = $pdo->prepare($sql); 
+            $stmt->execute();
+
+            echo '<div class="alert alert-danger">'.'l\'un numéro que vous avez saisi ne correspond à aucun contrat d\'abonnment chez la RADEEL'.'</div>';}
     
     
     }

@@ -1,5 +1,8 @@
 <?php
-/// les fonctions de recuperation de données du data base
+
+/// les fonctions de recuperation de données de la base de données
+
+
 
 function getFactureById($id){
     $pdo = getConnexion(); 

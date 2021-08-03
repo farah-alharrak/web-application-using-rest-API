@@ -184,11 +184,15 @@ function get_action(form)
                                         </div>
                                         <div class="form-group">
                                         <!-- Gérance<input type="text"  name="gerance" class="form-control" placeholder="gérance (eau ou bt) *" value="" name="gerance" required/>  -->
-                                     <select name="gerance" id="">
+                                     <!-- <select name="gerance" id="">
                                         <option value=""> ----- Gérance ----- </option> 
                                         <option value="eau" >Eau</option>
                                         <option value="bt" >Electricité(BT)</option>
-                                    </select> 
+                                    </select>  -->
+                                    <!-- <label for="gerance"><input type="checkbox" class="form-control" name="gerance" value="eau" >Eau</label>
+                                    
+                                    <label for="gerance"><input type="checkbox" class="form-control" name="gerance" value="bt" > Electricité</label><br> -->
+
                                     <!-- <p>NB:Si vous êtes déja inscrits pour une gérance il vous faut s'inscrire avec le même email et mot de passe pour l'autre gérance</p> -->
    
                                     </div>
@@ -196,7 +200,6 @@ function get_action(form)
                         <input type="submit" name="btn" class="btnRegister"  value="s'inscrire" />
                         </form>
                             </div> 
-                            <a href="inscription2.php">inscrivez-vous avec vos identifiants de contrats</a>
 
                         </div>
 

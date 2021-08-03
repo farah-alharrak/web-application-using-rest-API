@@ -3,7 +3,7 @@
 
 
 if(isset($_POST['btn'])){
-    if(isset($_POST['email']) && isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['repeatpassword']) && isset($_POST['prenom']) && isset($_POST['cin']) && isset($_POST['adresse']) && isset($_POST['gerance']))
+    if(isset($_POST['email']) && isset($_POST['nom']) && isset($_POST['password']) && isset($_POST['repeatpassword']) && isset($_POST['prenom']) && isset($_POST['cin']) && isset($_POST['adresse']) )
         {   $cin = $_POST['cin'];
             $nom = $_POST['nom'];
             $prenom = $_POST['prenom'];
@@ -11,27 +11,32 @@ if(isset($_POST['btn'])){
             $password = $_POST['password'];
             $repeatpassword = $_POST['repeatpassword'];
             $adresse = $_POST['adresse'];
-            $gerance = $_POST['gerance'];
 
 
 
             if($password==$repeatpassword){
                 $pdo = new PDO("mysql:host=localhost;dbname=laradeel", "root", "");
 
-    $sql = "INSERT INTO dossier_abonne values('','$cin', '$nom', '$prenom', '$email', '$password','','$adresse', '$gerance','en depot') ";
+    $sql = "INSERT INTO dossier_abonne values('','$cin', '$nom', '$prenom', '$email', '$password','','$adresse', 'eau','en depot') ";
+
+    $stmt = $pdo->prepare($sql); 
+
+    $stmt->execute();
+
+    $sql = "INSERT INTO dossier_abonne values('','$cin', '$nom', '$prenom', '$email', '$password','','$adresse', 'bt','en depot') ";
 
     $stmt = $pdo->prepare($sql); 
 
     $stmt->execute();
     /// tester si le cin et la gerance correspondante dans le formulaire (càd le contrat) existent dans notre BD puis faire le update du abonne_dossier
-    $sql = "SELECT cin FROM dossier_contrat where cin='$cin' and gerance='$gerance'";
+    $sql = "SELECT cin FROM dossier_contrat where cin='$cin' and gerance='eau'";
     $stmt = $pdo->prepare($sql); 
 
     $stmt->execute();
     if($stmt->rowCount() > 0){// cad cin existe
          
-        // recuperer l'id d'utilisateur ayant le cin et la gerance concernés
-        $sql = "SELECT abonne_id FROM dossier_abonne WHERE cin='$cin' and gerance='$gerance' ";
+        // recuperer l'id d'utilisateur d'eau ayant le cin concerné
+        $sql = "SELECT abonne_id FROM dossier_abonne WHERE cin='$cin' and gerance='eau' ";
 
         $stmt = $pdo->prepare($sql); 
 
@@ -41,7 +46,7 @@ if(isset($_POST['btn'])){
         $id_recuperé = $row[0]["abonne_id"];
  
         // recuperer le numero de contrat 
-        $sql2 = "SELECT num_contrat FROM dossier_contrat WHERE cin='$cin' and gerance='$gerance' ";
+        $sql2 = "SELECT num_contrat FROM dossier_contrat WHERE cin='$cin' and gerance='eau' ";
 
         $stmt2 = $pdo->prepare($sql2); 
 
@@ -51,7 +56,7 @@ if(isset($_POST['btn'])){
         $numContrat = $row2[0]["num_contrat"];
 
         // faire la mise à jour
-        $sql = "UPDATE dossier_contrat SET id_user = $id_recuperé WHERE num_contrat='$numContrat' and gerance='$gerance' ";
+        $sql = "UPDATE dossier_contrat SET id_user = $id_recuperé WHERE num_contrat='$numContrat' and gerance='eau' ";
 
         $stmt = $pdo->prepare($sql); 
 
@@ -59,7 +64,7 @@ if(isset($_POST['btn'])){
 
 
 
-        $sql = "UPDATE facture SET abonnee_id = $id_recuperé WHERE num_contrat='$numContrat' and gerance='$gerance' ";
+        $sql = "UPDATE facture SET abonnee_id = $id_recuperé WHERE num_contrat='$numContrat' and gerance='eau' ";
 
         $stmt = $pdo->prepare($sql); 
 
@@ -67,12 +72,75 @@ if(isset($_POST['btn'])){
 
 
 
-        $sql = "UPDATE consommation SET abonne_id = $id_recuperé WHERE num_contrat='$numContrat' and gerance='$gerance' ";
+        $sql = "UPDATE consommation SET abonne_id = $id_recuperé WHERE num_contrat='$numContrat' and gerance='eau' ";
+
+        $stmt = $pdo->prepare($sql); 
+
+        $stmt->execute();
+        
+
+
+        /////// il faut repeter la meme chose pour l'autre gerance
+
+    
+
+    
+    $sql = "SELECT cin FROM dossier_contrat where cin='$cin' and gerance='bt'";
+    $stmt = $pdo->prepare($sql); 
+
+    $stmt->execute();
+
+    if($stmt->rowCount() > 0){
+         
+        // recuperer l'id d'utilisateur ayant le cin et la gerance concernés
+        $sql = "SELECT abonne_id FROM dossier_abonne WHERE cin='$cin' and gerance='bt' ";
 
         $stmt = $pdo->prepare($sql); 
 
         $stmt->execute();
 
+        $row = $stmt->fetchAll();  
+        $id_recuperé = $row[0]["abonne_id"];
+ 
+        // recuperer le numero de contrat 
+        $sql2 = "SELECT num_contrat FROM dossier_contrat WHERE cin='$cin' and gerance='bt' ";
+
+        $stmt2 = $pdo->prepare($sql2); 
+
+        $stmt2->execute();
+
+        $row2 = $stmt2->fetchAll();  
+        $numContrat = $row2[0]["num_contrat"];
+
+        // faire la mise à jour
+        $sql = "UPDATE dossier_contrat SET id_user = $id_recuperé WHERE num_contrat='$numContrat' and gerance='bt' ";
+
+        $stmt = $pdo->prepare($sql); 
+
+        $stmt->execute();
+
+
+
+        $sql = "UPDATE facture SET abonnee_id = $id_recuperé WHERE num_contrat='$numContrat' and gerance='bt' ";
+
+        $stmt = $pdo->prepare($sql); 
+
+        $stmt->execute();
+
+
+
+        $sql = "UPDATE consommation SET abonne_id = $id_recuperé WHERE num_contrat='$numContrat' and gerance='bt' ";
+
+        $stmt = $pdo->prepare($sql); 
+
+        $stmt->execute();
+        
+    }else{}
+
+
+
+
+        /////////////////////////////////////////////////////////////////////////////////
 
         echo '<div class="alert alert-info">'.'inscription effectuée ' . '<a href="connexion.php">connectez-vous</a>'. '</div>' ;
 
@@ -90,7 +158,9 @@ if(isset($_POST['btn'])){
                                                <div class="col-md-6">
                                                <form action="register2.php?cin='.$cin.'" method="post" onsubmit="return myFunction()">
                                                    <div class="form-group">
-                                                   Numéro du contrat<input type="text" class="form-control" placeholder="identifiant du contrat *" value=""  name="contrat" required/>
+                                                   Numéro du contrat d\'eau<input type="text" class="form-control" placeholder="identifiant du contrat d\'eau *" value=""  name="contratEau" required/>
+                                                   Numéro du contrat d\'électricité<input type="text" class="form-control" placeholder="identifiant du contrat d\'électricité *" value=""  name="contratBt" required/>
+
                                                    </div>
                                                     
                                                    
@@ -98,16 +168,7 @@ if(isset($_POST['btn'])){
                                                <div class="col-md-6">
                                                    
                                                    
-                                                   <div class="form-group"> 
-                                                   <br> 
-                                                   <!-- Gérance<input type="text"  name="gerance" class="form-control" placeholder="gérance (eau ou bt) *" value="" name="gerance" required/>  -->
-                                                <select name="gerance" id="">
-                                                   <option value=""> ----- Gérance ----- </option> 
-                                                   <option value="eau" >Eau</option>
-                                                   <option value="bt" >Electricité(BT)</option>
-                                               </select><br> 
-              
-                                               </div>
+                                                   
                                                <br>
                                    <input type="submit" name="btn" class="btnRegister"  value="valider" style="color: blue" />
                                    </form>

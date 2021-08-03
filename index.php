@@ -1,19 +1,13 @@
 
-<?php
-// if (!$_SESSION['loginOK']) {
-// header('Location: /laradeel/connexion.php');
-// }
-?> 
-
 
 <?php
 require_once("./api.php");
 
-// le routage des chemins pour accéder à leurs factures et consommation par mois .. //
+// le routage des chemins pour accéder à leurs factures et consommation  .. //
 
     // localhost:8080/facture/:id   
     // localhost:8080/consommation/:id
-        // => cette route donne les données sous format json
+        // => ces route donne les données sous format json
 
 
 try{
